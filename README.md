@@ -92,6 +92,10 @@ sichtbar.
 
 ## Kontakt
 
-Dr. Arne Floh — Markenforschung, Brand Tracking, quantitative Marktforschung.
-Wenn Sie eine Studie dieser Art planen oder eine bestehende prüfen lassen
-wollen, schreiben Sie mir gern.
+**Dr. Arne Floh** — Markenforschung, Brand Tracking, quantitative
+Marktforschung. Wenn Sie eine Studie dieser Art planen oder eine bestehende
+prüfen lassen wollen, schreiben Sie mir gern.
+
+- [alpha-metrics.ai](https://alpha-metrics.ai)
+- [info@alpha-metrics.ai](mailto:info@alpha-metrics.ai)
+- [alpha-metrics.ai auf LinkedIn](https://www.linkedin.com/company/112210061/)

@@ -68,11 +68,25 @@ DUNKEL = {'flaeche': '#141a24', 'plane': '#0b0f16', 'ink': '#ffffff',
 MARKE = {'akzent': HELL['akzent'], 'dunkel': HELL['st1'],
          'zweit': HELL['zweit'], 'flaeche': HELL['flaeche'],
          'ink': HELL['ink']}
+# Kontakt der Fallstudie. Sie ist ein Portfoliostueck: Wer das Deck als PDF
+# weitergereicht bekommt oder den Monitor geschickt bekommt, soll ohne Umweg
+# sehen, von wem es stammt. Die Links werden im PDF mitgenommen.
+WEB, MAIL = 'https://alpha-metrics.ai', 'info@alpha-metrics.ai'
+LINKEDIN = 'https://www.linkedin.com/company/112210061/'
+KONTAKT_LINKS = (
+    '<a href="%s">alpha-metrics.ai</a> \u00b7 <a href="mailto:%s">%s</a> '
+    '\u00b7 <a href="%s">LinkedIn</a>' % (WEB, MAIL, MAIL, LINKEDIN))
+# Im Deck steht die Signatur auf der Titelfolie, im Monitor in der Fusszeile.
+KONTAKT = [
+    ('Dr. Arne Floh \u00b7 Oktober 2026',
+     'Dr. Arne Floh \u00b7 Oktober 2026<br>' + KONTAKT_LINKS),
+]
 HINWEIS = 'Demonstrationsdaten \u00b7 alle Zahlen und Marken erfunden'
 HINWEIS_CSS = """.s::before{content:"%s";position:absolute;top:58px;right:72px;
   font-size:10px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;
   color:%%(ak)s}
 .s.teiler::before{color:#fff;right:96px}
+.title .meta a{color:%%(ak)s;text-decoration:none}
 """ % HINWEIS
 HINWEIS_H1 = ('<h1>ZINTO Markenmonitor <span class="demo">'
               'Demonstrationsdaten</span></h1>')
@@ -82,7 +96,9 @@ HINWEIS_DASH_CSS = """
 .demo{display:inline-block;vertical-align:middle;margin-left:11px;
   font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
   color:var(--akzent);border:1px solid var(--akzent);border-radius:999px;
-  padding:3px 10px}"""
+  padding:3px 10px}
+footer a{color:var(--akzent);text-decoration:none}
+footer a:hover{text-decoration:underline}"""
 LOGO = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 110" \
 width="320" height="110">
   <rect width="320" height="110" rx="16" fill="%(akzent)s"/>
@@ -143,6 +159,8 @@ def umschreiben(text, karte):
         text = re.sub(r'(?<![\w])' + re.escape(a) + r'(?![\w])', b, text)
     for a, b in ERSETZUNGEN:
         text = re.sub(r'(?<![\w])' + re.escape(a) + r'(?![\w])', b, text)
+    for a, b in KONTAKT:
+        text = text.replace(a, b)
     for a, b in KATEGORIE:
         text = text.replace(a, b)
     for a, b in BEZEICHNER:
@@ -167,6 +185,12 @@ def markieren(name, text):
     anker = '<h1>ZINTO Markenmonitor</h1>'
     assert anker in text, 'Kopfzeile des Dashboards nicht gefunden'
     text = text.replace(anker, HINWEIS_H1, 1)
+    anker = ('<span>Dr. Arne Floh \u00b7 Markenstudie ZINTO September 2026'
+             '</span>')
+    assert anker in text, 'Fusszeile des Dashboards nicht gefunden'
+    text = text.replace(
+        anker, '<span>Markenstudie ZINTO September 2026 \u00b7 Dr. Arne Floh '
+        '\u00b7 %s</span>' % KONTAKT_LINKS, 1)
     anker = '  <p class="sub">Markenstudie September 2026'
     assert anker in text
     text = text.replace(anker, '  <p class="sub">' + HINWEIS_SATZ
