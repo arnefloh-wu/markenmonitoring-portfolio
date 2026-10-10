@@ -178,8 +178,8 @@ def markieren(name, text):
     Kapiteltrennern.
     """
     if name == 'slides_basis.py':
-        anker = ('  font-size:11px;color:%(muted)s;border-top:1px solid '
-                 '%(grid)s;padding-top:9px}\n')
+        anker = ('  font-size:11px;line-height:12px;color:%(muted)s;'
+                 'border-top:1px solid %(grid)s;padding-top:9px}\n')
         assert anker in text, 'Fusszeilenregel in stil() nicht gefunden'
         return text.replace(anker, anker + HINWEIS_CSS, 1)
     anker = '<h1>ZINTO Markenmonitor</h1>'

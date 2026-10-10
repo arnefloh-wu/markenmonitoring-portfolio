@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>ZINTO Markenmonitor</title>
 <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMjAgMTEwIiB3aWR0aD0iMzIwIiBoZWlnaHQ9IjExMCI+CiAgPHJlY3Qgd2lkdGg9IjMyMCIgaGVpZ2h0PSIxMTAiIHJ4PSIxNiIgZmlsbD0iIzFkNGVkOCIvPgogIDx0ZXh0IHg9IjE2MCIgeT0iNTYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmNoaXZvLCBIZWx2ZXRpY2EsIEFyaWFsLCBzYW5zLXNlcmlmIgogICAgICAgIGZvbnQtc2l6ZT0iNDYiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIyIiBmaWxsPSIjZmZmZmZmIj5aSU5UTzwvdGV4dD4KICA8dGV4dCB4PSIxNjAiIHk9IjgyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJjaGl2bywgSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiIKICAgICAgICBmb250LXNpemU9IjEzIiBmb250LXdlaWdodD0iNTAwIiBsZXR0ZXItc3BhY2luZz0iNCIgZmlsbD0iI2MzZDRmYiI+RkFMTFNUVURJRTwvdGV4dD4KPC9zdmc+Cg==">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 /* Layout: klebende Filterleiste, Kennzahlenstreifen, zweispaltiges Raster,
    darunter die Tabellenansicht. Bei Telefonbreite stapelt alles. */
@@ -14,26 +13,33 @@
   --grid:#e2e6ee; --base:#a3abba; --akzent:#1d4ed8; --zweit:#0d9488; --warnung:#9a6700;
   --st1:#16307e; --st2:#1d4ed8; --st3:#8fb2f6; --st4:#e8edf6;
   --chip:#ffffff; --chipan:#1a46c2; --chipant:#ffffff;
-  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
-  --body:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
-  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --display:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --body:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --flaeche:#141a24; --plane:#0b0f16; --ink:#ffffff; --ink2:#c2c8d4; --muted:#8a92a1;
   --grid:#283040; --base:#636c7d; --akzent:#4f87ef; --zweit:#10a89a; --warnung:#e0a33c;
   --st1:#9dbcf8; --st2:#3b74e8; --st3:#1e3f86; --st4:#232c3a;
-  --chip:#1d2430; --chipan:#2f62d8; --chipant:#ffffff; color-scheme:dark}}
+  --chip:#1d2430; --chipan:#2f62d8; --chipant:#ffffff; color-scheme:dark}
+  :root:not([data-theme="light"]) img.logo.hell{display:none}
+  :root:not([data-theme="light"]) img.logo.dunkel{display:block}}
 :root[data-theme="dark"]{
   --flaeche:#141a24; --plane:#0b0f16; --ink:#ffffff; --ink2:#c2c8d4; --muted:#8a92a1;
   --grid:#283040; --base:#636c7d; --akzent:#4f87ef; --zweit:#10a89a; --warnung:#e0a33c;
   --st1:#9dbcf8; --st2:#3b74e8; --st3:#1e3f86; --st4:#232c3a;
   --chip:#1d2430; --chipan:#2f62d8; --chipant:#ffffff; color-scheme:dark}
+:root[data-theme="dark"] img.logo.hell{display:none}
+:root[data-theme="dark"] img.logo.dunkel{display:block}
 *{box-sizing:border-box}
 body{margin:0;background:var(--flaeche);color:var(--ink);font-family:var(--body);
   font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
 .wrap{max-width:1180px;margin:0 auto;padding-inline:18px;padding-block:0 56px}
 header{padding-block:30px 18px;display:flex;gap:18px;align-items:flex-start}
-header img.logo{height:40px;width:auto;flex:none;border-radius:4px}
+header img.logo{height:28px;width:auto;flex:none}
+/* Die Wortmarke gibt es in zwei Faerbungen; sichtbar ist die, die auf
+   dem jeweiligen Grund lesbar bleibt. */
+img.logo.dunkel{display:none}
 @media(max-width:560px){header{flex-direction:column;gap:12px}}
 h1{font-family:var(--display);font-weight:700;font-size:clamp(25px,4vw,34px);
   letter-spacing:-.018em;margin:0;text-wrap:balance}
@@ -102,7 +108,7 @@ footer{margin-top:30px;padding-top:15px;border-top:1px solid var(--grid);font-si
 
 <div class="wrap">
 <header>
-  <img class="logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMjAgMTEwIiB3aWR0aD0iMzIwIiBoZWlnaHQ9IjExMCI+CiAgPHJlY3Qgd2lkdGg9IjMyMCIgaGVpZ2h0PSIxMTAiIHJ4PSIxNiIgZmlsbD0iIzFkNGVkOCIvPgogIDx0ZXh0IHg9IjE2MCIgeT0iNTYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmNoaXZvLCBIZWx2ZXRpY2EsIEFyaWFsLCBzYW5zLXNlcmlmIgogICAgICAgIGZvbnQtc2l6ZT0iNDYiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIyIiBmaWxsPSIjZmZmZmZmIj5aSU5UTzwvdGV4dD4KICA8dGV4dCB4PSIxNjAiIHk9IjgyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJjaGl2bywgSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiIKICAgICAgICBmb250LXNpemU9IjEzIiBmb250LXdlaWdodD0iNTAwIiBsZXR0ZXItc3BhY2luZz0iNCIgZmlsbD0iI2MzZDRmYiI+RkFMTFNUVURJRTwvdGV4dD4KPC9zdmc+Cg==" alt="ZINTO">
+  <img class="logo hell" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMjAgMTEwIiB3aWR0aD0iMzIwIiBoZWlnaHQ9IjExMCI+CiAgPHJlY3Qgd2lkdGg9IjMyMCIgaGVpZ2h0PSIxMTAiIHJ4PSIxNiIgZmlsbD0iIzFkNGVkOCIvPgogIDx0ZXh0IHg9IjE2MCIgeT0iNTYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmNoaXZvLCBIZWx2ZXRpY2EsIEFyaWFsLCBzYW5zLXNlcmlmIgogICAgICAgIGZvbnQtc2l6ZT0iNDYiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIyIiBmaWxsPSIjZmZmZmZmIj5aSU5UTzwvdGV4dD4KICA8dGV4dCB4PSIxNjAiIHk9IjgyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJjaGl2bywgSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiIKICAgICAgICBmb250LXNpemU9IjEzIiBmb250LXdlaWdodD0iNTAwIiBsZXR0ZXItc3BhY2luZz0iNCIgZmlsbD0iI2MzZDRmYiI+RkFMTFNUVURJRTwvdGV4dD4KPC9zdmc+Cg==" alt="alpha-metrics.ai"><img class="logo dunkel" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMjAgMTEwIiB3aWR0aD0iMzIwIiBoZWlnaHQ9IjExMCI+CiAgPHJlY3Qgd2lkdGg9IjMyMCIgaGVpZ2h0PSIxMTAiIHJ4PSIxNiIgZmlsbD0iIzFkNGVkOCIvPgogIDx0ZXh0IHg9IjE2MCIgeT0iNTYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmNoaXZvLCBIZWx2ZXRpY2EsIEFyaWFsLCBzYW5zLXNlcmlmIgogICAgICAgIGZvbnQtc2l6ZT0iNDYiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIyIiBmaWxsPSIjZmZmZmZmIj5aSU5UTzwvdGV4dD4KICA8dGV4dCB4PSIxNjAiIHk9IjgyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJjaGl2bywgSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiIKICAgICAgICBmb250LXNpemU9IjEzIiBmb250LXdlaWdodD0iNTAwIiBsZXR0ZXItc3BhY2luZz0iNCIgZmlsbD0iI2MzZDRmYiI+RkFMTFNUVURJRTwvdGV4dD4KPC9zdmc+Cg==" alt="">
   <div>
   <h1>ZINTO Markenmonitor <span class="demo">Demonstrationsdaten</span></h1>
   <p class="sub"><strong>Alle Zahlen, Marken und Befragten sind erfunden.</strong> Markenstudie September 2026, Österreich und Deutschland. Filter wirken
