@@ -65,9 +65,16 @@ DUNKEL = {'flaeche': '#141a24', 'plane': '#0b0f16', 'ink': '#ffffff',
           'chipan': '#2f62d8', 'chipant': '#ffffff'}
 # Dieselbe Palette fuer die Decks. marke_laden() leitet die Funnel-Rampe aus
 # Akzent und Dunkelton ab, deshalb stehen hier nur die fuenf Eckwerte.
+# Die Schriften kommen aus demselben Stack wie im Monitor, damit Deck und
+# Seite der Fallstudie zusammenpassen; die Palette bleibt ihre eigene.
 MARKE = {'akzent': HELL['akzent'], 'dunkel': HELL['st1'],
          'zweit': HELL['zweit'], 'flaeche': HELL['flaeche'],
-         'ink': HELL['ink']}
+         'ink': HELL['ink'], 'teiler': HELL['st1'],
+         'rampe': [HELL['st3'], HELL['st2'], HELL['st1']],
+         'schrift': 'system-ui,-apple-system,"Segoe UI",Roboto,'
+                    '"Helvetica Neue",Arial,sans-serif',
+         'anzeige': '"Iowan Old Style","Palatino Linotype",Palatino,'
+                    '"Book Antiqua",Georgia,serif'}
 # Kontakt der Fallstudie. Sie ist ein Portfoliostueck: Wer das Deck als PDF
 # weitergereicht bekommt oder den Monitor geschickt bekommt, soll ohne Umweg
 # sehen, von wem es stammt. Die Links werden im PDF mitgenommen.
@@ -89,7 +96,9 @@ HINWEIS_CSS = """.s::before{content:"%s";position:absolute;top:58px;right:72px;
 .title .meta a{color:%%(ak)s;text-decoration:none}
 """ % HINWEIS
 HINWEIS_H1 = ('<h1>ZINTO Markenmonitor <span class="demo">'
-              'Demonstrationsdaten</span></h1>')
+              'Demonstrationsdaten</span></h1>\n'
+              '  <p class="kontakt">Dr. Arne Floh \u00b7 %s</p>'
+              % KONTAKT_LINKS)
 HINWEIS_SATZ = ('<strong>Alle Zahlen, Marken und Befragten sind '
                 'erfunden.</strong>')
 HINWEIS_DASH_CSS = """
@@ -98,7 +107,10 @@ HINWEIS_DASH_CSS = """
   color:var(--akzent);border:1px solid var(--akzent);border-radius:999px;
   padding:3px 10px}
 footer a{color:var(--akzent);text-decoration:none}
-footer a:hover{text-decoration:underline}"""
+footer a:hover{text-decoration:underline}
+.kontakt{margin-top:8px;font-size:13.5px;color:var(--ink2)}
+.kontakt a{color:var(--akzent);text-decoration:none}
+.kontakt a:hover{text-decoration:underline}"""
 LOGO = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 110" \
 width="320" height="110">
   <rect width="320" height="110" rx="16" fill="%(akzent)s"/>
@@ -189,8 +201,8 @@ def markieren(name, text):
              '</span>')
     assert anker in text, 'Fusszeile des Dashboards nicht gefunden'
     text = text.replace(
-        anker, '<span>Markenstudie ZINTO September 2026 \u00b7 Dr. Arne Floh '
-        '\u00b7 %s</span>' % KONTAKT_LINKS, 1)
+        anker, '<span>Markenstudie ZINTO September 2026 \u00b7 '
+        'Dr. Arne Floh</span>', 1)
     anker = '  <p class="sub">Markenstudie September 2026'
     assert anker in text
     text = text.replace(anker, '  <p class="sub">' + HINWEIS_SATZ
